@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div id="app1">
+        <span>{{name}}</span><br>
+        <span>{{AddName()}}</span>
+        <span>{{AddName()}}</span>
+        <span>{{AddName2}}</span>
+        <span>{{AddName2}}</span>
+        <span>{{num}}</span>
+    </div>
+    <script>
+        var app1=new Vue({
+            el:"#app1",
+            data:{
+                name:"linchuan",
+                num:1
+            },
+            methods:{//无缓存
+                AddName:function () {
+                    return "Hello "+this.name;
+                }
+            },
+            computed:{//有缓存//受依赖数据的影响
+                AddName2: {
+                    get:function () {
+                        console.log("AddName2");
+                        return "Hello "+this.name;
+                    },
+                    set: function (name) {
+                        this.name=name;
+                    }
+                }
+            },
+            watch:{//监测,数据改变进行的操作
+                name: function () {
+                    console.log("监测到name发生改变");
+                    this.num+=1;
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

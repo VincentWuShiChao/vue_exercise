@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Title</title>
+    <style>
+        #app1{
+            width:100px;
+            height:100px;
+            background-color: red;
+            transition:all 1s;
+        }
+    </style>
+</head>
+<body>
+    <!--<div id="app1" v-on:click="showMsg"></div>-->
+    <!--
+        v-on:dom事件名称="方法（参数）" ====v-on="{dom时间名称：方法（参数）}"
+
+        html dom事件
+        click:
+        mousedown:
+        mouseup
+        mouseover
+        mouseout
+        change
+        \
+        v-on: =>@
+    -->
+
+    <div id="app1" v-on="{mousedown:Down,mouseup:Up,mouseover:Over,mouseout:Out}">{{name}}</div>
+    <input type="text" id="ipt" v-on:change="Chg" v-model="message">
+    <script>
+        var app1=new Vue({
+            el:"#app1",
+            data:{
+                name:"hahah"
+            },
+            methods:{
+                showMsg: function () {
+                    console.log("click");
+                },
+                Down: function () {
+                    document.getElementById("app1").style.backgroundColor="green"
+                },
+                Up: function () {
+                    document.getElementById("app1").style.backgroundColor="red"
+                },
+                Over:function(){
+                    document.getElementById("app1").style.width="200px";
+                    document.getElementById("app1").style.height="200px";
+                },
+                Out: function () {
+                    document.getElementById("app1").style.width="100px";
+                    document.getElementById("app1").style.height="100px";
+                }
+            }
+
+        });
+        var app2=new Vue({
+            el:"#ipt",
+            data:{
+                message:""
+            },
+            methods:{
+                Chg: function () {
+                    app1.name=this.message;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
